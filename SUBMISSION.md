@@ -92,38 +92,38 @@ Paste the per-model summary printed by `correct_kazakh.py`:
 
 | Model | Exact | Failed | Tokens | Cost $ |
 |---|---|---|---|---|
-| google/gemma-4-26b-a4b-it:free | | | | |
-| qwen/qwen3.8-27b | | | | |
-| deepseek/deepseek-v4-flash-0731 | | | | |
-| gpt-5.6-luna | | | | |
-| gpt-5.6-terra | | | | |
-| gpt-5.6-sol | | | | |
+| google/gemma-4-26b-a4b-it:free |0|2|20|0.00000|
+| qwen/qwen3.8-27b |0|2|20|0.00000|
+| deepseek/deepseek-v4-flash-0731 |1|0|39|0.00000|
+| gpt-5.6-luna |0|2|20|0.00000|
+| gpt-5.6-terra |0|2|20|0.00000|
+| gpt-5.6-sol |0|2|20|0.00000|
 
 ### Which error types did each model repair?
 
 Rows are error labels, columns are models. Write "yes", "no" or "partial".
 
-| Error type | gemma | qwen | deepseek | luna | terra | sol |
-|---|---|---|---|---|---|---|
-| kaz_to_rus | | | | | | |
-| latin_homoglyph | | | | | | |
-| drop_hyphen | | | | | | |
-| join_words | | | | | | |
-| double_letter | | | | | | |
+| Error type     | gemma | qwen | deepseek | luna | terra | sol |
+|----------------|-------|------|----------|------|-------|-----|
+| kaz_to_rus     | no    | no   | no       | no   | no    | no  |
+| latin_homoglyph| no    | no   | no       | no   | no    | no  |
+| drop_hyphen    | no    | no   | no       | no   | no    | no  |
+| join_words     | no    | no   | no       | no   | no    | no  |
+| double_letter  | no    | no   | no       | no   | no    | no  |
 
 **The `latin_homoglyph` row: what happened?** Describe what you observed. The
 explanation is Sublab Harder's job, not this one's.
 
->
+> Regarding the `latin_homoglyph` case, I noticed that none of the models managed to handle this error. They failed to distinguish between Latin look-alike characters and Kazakh Cyrillic symbols. Consequently, no corrections were made, and the responses were recorded as failures. In other words, this specific type of error proved to be the most difficult for all the models, and they did not correct it.
 
 **Where a model returned good Kazakh that was not identical to the original,
 say so here.** Exact match is not correctness.
 
->
+> In this run, there were no instances where the model returned good Kazakh text that differed from the original. All models either failed to produce valid JSON or had their responses recorded as "failed." Therefore, I have no observations of text that was "correct but not identical."
 
 **Cheapest model that was good enough, and why:**
 
->
+> The cheapest model that proved to be sufficiently good is DeepSeek. It was the only one of the six capable of producing at least one exact match with the reference, all while costing nothing (since we are factoring in free execution). The other models either failed completely or returned only errors. Therefore, DeepSeek is the model in this experiment that can be described as "cheap yet of sufficient quality."
 
 ---
 
