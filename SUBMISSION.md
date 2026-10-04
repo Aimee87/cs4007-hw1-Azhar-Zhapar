@@ -1,16 +1,16 @@
 # HW1 submission
 
-**Name:**
-**Student ID:**
-**Group:**
-**Repository:**
+**Name:** Azhar
+**Student ID:** S23069523
+**Group:** css4007-eng-8
+**Repository:** cs4007-hw1-Azhar-Zhapar
 
 ## AI tool disclosure
 
 State which AI tools you used and for what. Expected and fine; undisclosed use
 is not.
 
->
+> I worked with Copilot.
 
 ---
 
@@ -18,7 +18,7 @@ is not.
 
 **How I laid the catalogue out inside the system prompt, and why:**
 
->
+> 
 
 **My turn 5 (Kazakh or Russian):**
 
