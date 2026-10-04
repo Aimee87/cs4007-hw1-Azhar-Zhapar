@@ -152,42 +152,45 @@ say so here.** Exact match is not correctness.
 One row per `latin_homoglyph` sentence in the dataset. Paste the actual decoded
 token strings around the divergence point, not a description of them.
 
-| Sentence id | Foreign char (index, name) | Tokens correct | Tokens corrupted | Δ | Diverges at |
-|---|---|---|---|---|---|
-| | | | | | |
-| | | | | | |
+| Sentence id | Foreign char (index, name)                  | Tokens correct | Tokens corrupted | Δ | Diverges at |
+|-------------|---------------------------------------------|----------------|------------------|---|-------------|
+| KZ-03       | (0, 'A', LATIN CAPITAL LETTER A), (2, 'a', LATIN SMALL LETTER A), (5, 't', LATIN SMALL LETTER T) | 16 | 20 | +4 | 0 |
+| KZ-08       | (1, 'o', LATIN SMALL LETTER O), (3, 'a', LATIN SMALL LETTER A), (9, 'T', LATIN CAPITAL LETTER T) | 21 | 24 | +3 | 1 |
 
 **Token pieces around the divergence:**
 
 ```
-correct  :
-corrupted:
+correct   : ['А', 'лая', 'қ', 'тарға', ' ақша']
+corrupted : ['A', 'л', 'a', 'я', 'қ']
+
+correct   : ['Д', 'он', 'аль', 'д', ' Т', 'рамп']
+corrupted : ['Д', 'o', 'н', 'a', 'л', 'ль']
 ```
 
 ### C. Did it get better?
 
 | Language | cl100k_base | o200k_base | Change |
-|---|---|---|---|
-| kk | | | |
-| ru | | | |
-| en | | | |
+|----------|-------------|-------------|--------|
+| kk       | 0.760       | 0.319       | −0.441 |
+| ru       | 0.466       | 0.267       | −0.199 |
+| en       | 0.203       | 0.203       | 0.000  |
 
 ### Written answers
 
 **1. What is the Kazakh tax?** The ratio against English in both encodings, the
 dollar figure from A, and how much it changed between the two tokenizers.
 
->
+> The "Kazakh tax" means that Kazakh text costs more than English text: with the old `cl100k_base` vocabulary, the cost was approximately 3.75 times higher (about $1.00 per thousand sentences versus $0.29 for English), whereas with the new `o200k_base` vocabulary, the tax dropped to 1.58 times (about $0.42 versus $0.29)—meaning the gap was cut almost in half.
 
 **2. Why did the models repair `kaz_to_rus` but struggle with
 `latin_homoglyph`?** Both are single-letter substitutions and both look almost
 identical on screen. Use your token streams from B as the evidence. Say what the
 model actually received in each case.
 
->
+> The models were able to correct **kaz_to_rus** because the characters remained Cyrillic and the tokenizer saw almost the same stream—with just a single substitution—making reconstruction easier. The situation with **latin_homoglyph** was different: the characters looked identical on screen but were actually Latin, causing the tokenizer to split the text in a completely different way. For example, instead of the correct stream `['А', 'лая', 'қ', 'тарға', ' ақша']`, the model received `['A', 'л', 'a', 'я', 'қ']`, and instead of `['Д', 'он', 'аль', 'д', ' Т', 'рамп']`, it got `['Д', 'o', 'н', 'a', 'л', 'ль']`. In other words, the model was effectively seeing a different set of tokens, making it difficult for it to recognize that it was the same phrase.
 
 **3. Name one thing this measurement does not explain about your Sublab Medium
 results.** You measured OpenAI's tokenizers; three of your six models were not
 OpenAI's. What follows, and what would you have to do to close the gap?
 
->
+> This measurement reflects the performance of **OpenAI** tokenizers only; however, in Sublab Medium, I used six models, three of which (Gemma, Qwen, and DeepSeek) employ their own proprietary vocabularies. Consequently, this does not account for their errors, as they may have tokenized the text differently than `cl100k_base` or `o200k_base`. To address this gap, it is necessary to independently test their tokenizers—or locate documentation on their vocabularies—and compare the results.
