@@ -135,17 +135,17 @@ say so here.** Exact match is not correctness.
 
 | Language | Tokens | Chars | Tok/char | × English | $ per 1,000 sentences |
 |---|---|---|---|---|---|
-| kk | | | | | |
-| ru | | | | | |
-| en | | | | 1.00 | |
+| kk |200|263|0.760|3.75|1.00|
+| ru |129|277|0.466|2.30|0.65|
+| en |59|291|0.203|1.00|0.29|
 
 **`o200k_base`:**
 
 | Language | Tokens | Chars | Tok/char | × English | $ per 1,000 sentences |
 |---|---|---|---|---|---|
-| kk | | | | | |
-| ru | | | | | |
-| en | | | | 1.00 | |
+| kk |84|263|0.319|1.58|0.42|
+| ru |74|277|0.267|1.32|0.37|
+| en |59|291|0.203|1.00|0.29|
 
 ### B. What a homoglyph does
 
