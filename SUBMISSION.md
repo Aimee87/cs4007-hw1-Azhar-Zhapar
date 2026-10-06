@@ -1,8 +1,11 @@
 # HW1 submission
 
 **Name:** Azhar
+
 **Student ID:** S23069523
+
 **Group:** css4007-eng-8
+
 **Repository:** cs4007-hw1-Azhar-Zhapar
 
 ## AI tool disclosure
